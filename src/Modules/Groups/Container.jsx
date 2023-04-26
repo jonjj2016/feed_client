@@ -6,6 +6,7 @@ import { useGet, useFind, useMutation } from 'figbird'
 import GroupStudents from './app/GroupStudents'
 import FeedbackForm from '@modules/FeedBacks/Container'
 import { notifications } from '@mantine/notifications'
+import StudentsTransferList from '@modules/Students/TransferList'
 
 import StudentCreate from '@modules/Students/FormContainer'
 import { Tabs } from '@mantine/core'
@@ -21,12 +22,19 @@ const GroupDetails = () => {
     constants.GROUPS,
   )
   const { data: groupData, error: groupGetError } = useGet(constants.GROUPS, id)
-  const { data: studentData, error: studentError } = useFind(
-    constants.STUDENTS,
-    {
-      query: { _id: groupData?.participantIds },
-    },
+  console.log(
+    '🚀 ~ file: Container.jsx:25 ~ GroupDetails ~ groupData:',
+    groupData,
   )
+
+  var { data: studentData, error: studentError } = useFind(constants.STUDENTS, {
+    query: { $or: groupData?.participantIds },
+  })
+
+  const { data: allStudents, error: allStudentsError } = useFind(
+    constants.STUDENTS,
+  )
+  console.log(allStudents)
   useEffect(() => {
     let err =
       studentError?.message ||
@@ -102,6 +110,10 @@ const GroupDetails = () => {
         </Tabs.Panel>
         <Tabs.Panel value="students" pt="xs">
           <StudentCreate process="create" />
+          {/* <StudentsTransferList
+            studentsList={studentData || []}
+            groupData={groupData || []}
+          /> */}
           <GroupStudents
             onFeedBack={onFeedBack}
             onDelete={onDelete}

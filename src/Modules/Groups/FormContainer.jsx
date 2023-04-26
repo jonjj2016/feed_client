@@ -7,7 +7,7 @@ import { notifications } from '@mantine/notifications'
 import { useParams, useNavigate } from 'react-router-dom'
 import constants from '@constants/index'
 import ModalWrapper from '@app/Modal'
-import CurriculumForm from './Form'
+import GroupForm from './Form'
 
 const CurriculumContainer = ({ process }) => {
   const { id } = useParams()
@@ -56,7 +56,7 @@ const CurriculumContainer = ({ process }) => {
         onClose={close}
         title="Create Group"
       >
-        <CurriculumForm data={data} onSave={onSave} onDelete={onDelete} />
+        <GroupForm data={data} onSave={onSave} onDelete={onDelete} />
       </ModalWrapper>
       <Button variant="default" onClick={() => open(constants.GROUPS)}>
         {process === 'create' ? 'Create Group' : 'Open'}

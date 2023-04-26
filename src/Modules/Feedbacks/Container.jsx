@@ -33,27 +33,19 @@ const FeedBacks = () => {
     }
   }, [feedBackMutatePatch])
   const onSave = async (reset, formValues) => {
-    console.log(formValues)
     const data = { ...formValues, student: studentId, instructorId: userId }
     const feedBack = await create(data)
-    console.log('🚀 ~ file: Container.jsx:34 ~ onSave ~ feedBAck:', feedBack)
     notifications.show({
       title: 'Success',
       color: 'green',
       message: 'Added FeedBack',
     })
-    //   useEffect(
-    //     () => () => {
     reset({
       text: '',
-
       lectureIds: '',
       assessmentValues: [{ key: '', value: '5', text: '' }],
     })
     close()
-    //     },
-    //     [],
-    //   )
   }
   return (
     <div>
