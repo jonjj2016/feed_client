@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+    reactapp:
+      build:
+        context: .
+        dockerfile: dockerfile
+      container_name: react_vite_app
+      ports:
+        - '3000:3000'
+      

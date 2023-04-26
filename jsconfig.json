@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "strict": true,
+    "target": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "checkJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/Assets/*"],
+      "@app/*": ["src/app/*"],
+      "@components/*": ["src/app/*"],
+      "@pages/*": ["src/Pages/*"],
+      "@state/*": ["src/State/*"],
+      "@modals/*": ["src/app/Modals/*"],
+      "@hooks/*": ["src/Hooks/*"],
+      "@constants/*": ["src/Constants/*"],
+      "@utils/*": ["src/Utils/*"],
+      "@modules/*": ["src/Modules/*"]
+    }
+  },
+  "include": [
+    "src/**/*.js",
+    "src/**/**/*.js",
+    "src/**/*.jsx",
+    "src/**/**/*.jsx",
+    "src/**/*.svg",
+    "public/*.svg"
+  ],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./jsconfig.node.json" }]
+}
