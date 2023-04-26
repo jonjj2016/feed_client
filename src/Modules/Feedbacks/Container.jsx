@@ -14,7 +14,7 @@ const FeedBacks = () => {
   const studentId = searchParams.get('studentId')
   const { open, match, close } = useModalNavigate()
   const { data: lectures } = useFind(constants.LECTURES, {
-    query: { $sort: '-createdAt' },
+    query: { $sort: '-createdAt', isDeleted: false },
   })
   const { userId } = useSelector((state) => state.global)
 
@@ -56,9 +56,6 @@ const FeedBacks = () => {
       >
         <FeedBackForm onSave={onSave} lectures={lectures} />
       </ModalWrapper>
-      {/* <Button variant="default" onClick={() => open(constants.FEEDBACKS)}>
-        Open
-      </Button> */}
     </div>
   )
 }

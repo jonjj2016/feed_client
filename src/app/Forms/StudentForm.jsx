@@ -50,15 +50,7 @@ const StudentForm = ({ onSave, data, onDelete }) => {
         error={errors['dob']?.message}
         label="Day of Birth"
       />
-      {/* <Input
-        control={control}
-        label="Day of Birth"
-        name="dob"
-        error={errors['lName']?.message}
-        placeholder="Date of birth"
-        autosize
-        icon={<IconUser />}
-      /> */}
+
       <br />
       <button type="submit">{params?.id ? 'Update' : 'Submit'}</button>
       {state.updateId && (

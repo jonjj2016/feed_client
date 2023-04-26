@@ -1,7 +1,7 @@
 import React from 'react'
-
-const Students = () => {
-  return <div>Students</div>
+import Students from '@modules/Students/Students'
+const StudentsPage = () => {
+  return <Students />
 }
 
-export default Students
+export default StudentsPage

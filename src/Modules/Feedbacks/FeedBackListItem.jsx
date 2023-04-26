@@ -3,11 +3,15 @@ import {
   createStyles,
   Card,
   Group,
-  Switch,
+  Collapse,
   Text,
   rem,
   Rating,
 } from '@mantine/core'
+import FeedbackForm from '@app/Forms/FeedBackForm'
+import { useDisclosure } from '@mantine/hooks'
+import { useMutation, useFind } from 'figbird'
+import constants from 'src/Constants/index'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -38,9 +42,16 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-const FeedBackListItem = ({ title, description, data }) => {
+const FeedBackListItem = ({ title, description, data, feedback }) => {
+  const [opened, { toggle, close }] = useDisclosure(false)
+  const { patch, error } = useMutation(constants.FEEDBACKS)
   const { classes } = useStyles()
-
+  const onFeedbackSave = async (reset, values) => {
+    await patch(values._id, values)
+    reset()
+    close()
+    console.log(values)
+  }
   const items = data.map((item) => (
     <Group position="apart" className={classes.item} noWrap spacing="xl">
       <div>
@@ -50,18 +61,18 @@ const FeedBackListItem = ({ title, description, data }) => {
         </Text>
         <Rating readOnly count={10} value={item.value} />
       </div>
-      {/* <Switch
-        onLabel="ON"
-        offLabel="OFF"
-        className={classes.switch}
-        size="lg"
-      /> */}
     </Group>
   ))
 
   return (
     <>
-      <Card withBorder radius="md" p="xl" className={classes.card}>
+      <Card
+        onClick={toggle}
+        withBorder
+        radius="md"
+        p="xl"
+        className={classes.card}
+      >
         <Text fz="lg" className={classes.title} fw={500}>
           {title}
         </Text>
@@ -71,6 +82,13 @@ const FeedBackListItem = ({ title, description, data }) => {
         {items}
       </Card>
       <br />
+      <Collapse in={opened}>
+        <FeedbackForm
+          defaultValue={feedback}
+          onSave={onFeedbackSave}
+          lectures={[]}
+        />
+      </Collapse>
       <br />
     </>
   )

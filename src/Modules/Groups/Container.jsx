@@ -6,8 +6,6 @@ import { useGet, useFind, useMutation } from 'figbird'
 import GroupStudents from './app/GroupStudents'
 import FeedbackForm from '@modules/FeedBacks/Container'
 import { notifications } from '@mantine/notifications'
-import StudentsTransferList from '@modules/Students/TransferList'
-
 import StudentCreate from '@modules/Students/FormContainer'
 import { Tabs } from '@mantine/core'
 import { IconPhoto, IconUserEdit } from '@tabler/icons-react'
@@ -22,19 +20,14 @@ const GroupDetails = () => {
     constants.GROUPS,
   )
   const { data: groupData, error: groupGetError } = useGet(constants.GROUPS, id)
-  console.log(
-    '🚀 ~ file: Container.jsx:25 ~ GroupDetails ~ groupData:',
-    groupData,
-  )
 
   var { data: studentData, error: studentError } = useFind(constants.STUDENTS, {
-    query: { $or: groupData?.participantIds },
+    query: { _id: groupData?.participantIds },
   })
 
   const { data: allStudents, error: allStudentsError } = useFind(
     constants.STUDENTS,
   )
-  console.log(allStudents)
   useEffect(() => {
     let err =
       studentError?.message ||
@@ -70,6 +63,7 @@ const GroupDetails = () => {
     open(constants.FEEDBACKS, { search: `studentId=${studentId}` })
   }
   const onUserProfile = (id) => navigate(`/students/${id}`)
+
   return (
     <div>
       <FeedbackForm />
@@ -109,7 +103,7 @@ const GroupDetails = () => {
           </Button>
         </Tabs.Panel>
         <Tabs.Panel value="students" pt="xs">
-          <StudentCreate process="create" />
+          <StudentCreate process="create" btntxt="Create Student" />
           {/* <StudentsTransferList
             studentsList={studentData || []}
             groupData={groupData || []}
