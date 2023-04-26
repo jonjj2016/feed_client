@@ -6,24 +6,29 @@ import { useMutation, useFind } from 'figbird'
 import { useNavigate } from 'react-router-dom'
 import { IconSettings, IconTrash } from '@tabler/icons-react'
 import Form from './FormContainer'
+import { notifications } from '@mantine/notifications'
 
-const Students = () => {
+const Students = ({}) => {
   const navigate = useNavigate()
   const { open } = useModalNavigate()
-  const { data, isFetching } = useFind(constants.STUDENTS, {
+  const { data, error } = useFind(constants.STUDENTS, {
     query: { isDeleted: false },
   })
   const { patch } = useMutation(constants.STUDENTS)
-
-  const [elements, setElements] = useState([])
-  const rows = elements.map((element) => (
-    <tr
-      onClick={() => navigate(`/students/${element._id}`)}
-      style={{ cursor: 'pointer' }}
-      key={element._id}
-    >
-      <td>{element.fName}</td>
-      <td>{element.lName}</td>
+  useEffect(() => {
+    if (error) {
+      notifications.show({
+        title: 'Error',
+        message: error.message,
+        color: 'red',
+      })
+    }
+  }, [error])
+  const rows = data?.map((element) => (
+    <tr style={{ cursor: 'pointer' }} key={element._id}>
+      <td onClick={() => navigate(`/students/${element._id}`)}>
+        {element.fName} {element.lName}
+      </td>
       <td>{element.dob}</td>
       <td>{element.isActive ? 'yes' : 'No'}</td>
       <td>
@@ -50,20 +55,13 @@ const Students = () => {
     </tr>
   ))
 
-  useEffect(() => {
-    if (!isFetching && data) {
-      setElements(data)
-    }
-  }, [data])
-
   return (
     <div>
       <Form process="create" btntxt="Create Student" />
       <Table highlightOnHover striped>
         <thead>
           <tr>
-            <th key={7}>First Name</th>
-            <th key={6}>Last Name</th>
+            <th key={7}> Name</th>
             <th key={5}>dob</th>
             <th key={3}>Active</th>
             <th key={2}>Edit</th>

@@ -56,9 +56,6 @@ const FeedBacks = () => {
       >
         <FeedBackForm onSave={onSave} lectures={lectures} />
       </ModalWrapper>
-      {/* <Button variant="default" onClick={() => open(constants.FEEDBACKS)}>
-        Open
-      </Button> */}
     </div>
   )
 }

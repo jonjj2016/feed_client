@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Button } from '@mantine/core'
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import { useSelector } from 'react-redux'
-import { useMutation, useGet } from 'figbird'
+import { useMutation, useGet, useFind } from 'figbird'
 import { notifications } from '@mantine/notifications'
 import { useParams, useNavigate } from 'react-router-dom'
 import useFigbird from '@hooks/useFigbird'
@@ -70,6 +70,9 @@ const StudentsContainer = ({ process, btntxt }) => {
       close()
     }
   }
+  const { data: students, isFetching } = useFind(constants.STUDENTS, {
+    query: { isDeleted: false },
+  })
   return (
     <div>
       <ModalWrapper

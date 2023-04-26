@@ -1,17 +1,10 @@
 import React from 'react'
-import { useFind, useMutation, useGet } from 'figbird'
-import { createStyles, Text, Avatar, Group, rem } from '@mantine/core'
+import { useFind, useGet } from 'figbird'
+import { Text, Avatar, Group, rem, Button } from '@mantine/core'
 
 import constants from '@constants/index'
 import { useParams } from 'react-router-dom'
 import FeedBackListItem from '@modules/Feedbacks/FeedBackListItem'
-
-const useStyles = createStyles((theme) => ({
-  body: {
-    paddingLeft: rem(54),
-    paddingTop: theme.spacing.sm,
-  },
-}))
 
 const StudentDetails = () => {
   const { id } = useParams()
@@ -32,11 +25,13 @@ const StudentDetails = () => {
           </Text>
         </div>
       </Group>
+
       <Text size="sm">Total FeedBacks {feedbacks?.length}</Text>
       <br />
       {feedbacks &&
         feedbacks.map((feedback) => (
           <FeedBackListItem
+            feedback={feedback}
             description={feedback.text}
             title={feedback.lectureIds[0]}
             data={feedback.assessmentValues}
