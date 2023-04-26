@@ -6,7 +6,7 @@ import TextArea from '@app/UI/TextArea/Controller'
 import DatePicker from '@app/UI/DatePicker/Controller'
 import { IconHeading, IconFileTextAi, IconUser } from '@tabler/icons-react'
 
-const CurriculumForm = ({ onSave, data, onDelete }) => {
+const StudentForm = ({ onSave, data, onDelete }) => {
   const { close, state, params } = useModalNavigate()
 
   const {
@@ -45,11 +45,20 @@ const CurriculumForm = ({ onSave, data, onDelete }) => {
         icon={<IconUser />}
       />
       <br />
-      <DatePicker
+      {/* <DatePicker
         control={control}
         name="dob"
         error={errors['dob']?.message}
         label="Day of Birth"
+      /> */}
+      <Input
+        control={control}
+        label="Day of Birth"
+        name="dob"
+        error={errors['lName']?.message}
+        placeholder="Date of birth"
+        autosize
+        icon={<IconUser />}
       />
       <br />
       <button type="submit">{params?.id ? 'Update' : 'Submit'}</button>
@@ -63,4 +72,4 @@ const CurriculumForm = ({ onSave, data, onDelete }) => {
   )
 }
 
-export default CurriculumForm
+export default StudentForm

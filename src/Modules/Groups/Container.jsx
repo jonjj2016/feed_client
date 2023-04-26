@@ -22,19 +22,14 @@ const GroupDetails = () => {
     constants.GROUPS,
   )
   const { data: groupData, error: groupGetError } = useGet(constants.GROUPS, id)
-  console.log(
-    '🚀 ~ file: Container.jsx:25 ~ GroupDetails ~ groupData:',
-    groupData,
-  )
 
   var { data: studentData, error: studentError } = useFind(constants.STUDENTS, {
-    query: { $or: groupData?.participantIds },
+    query: { _id: groupData?.participantIds },
   })
 
   const { data: allStudents, error: allStudentsError } = useFind(
     constants.STUDENTS,
   )
-  console.log(allStudents)
   useEffect(() => {
     let err =
       studentError?.message ||

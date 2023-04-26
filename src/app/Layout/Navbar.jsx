@@ -18,7 +18,7 @@ const data = [
   },
 
   { icon: null, label: 'Pages' },
-  //   { icon: IconUser, href: '/students', label: 'Students' },
+  { icon: IconUser, href: '/students', label: 'Students' },
   { icon: IconAbacus, href: '/lectures', label: 'Lectures' },
   { icon: IconAddressBook, href: '/groups', label: 'Groups' },
   { icon: IconFileInvoice, href: '/feedbacks', label: 'Feedbacks' },
