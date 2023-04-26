@@ -1,5 +1,6 @@
-import { Button, Card } from '@mantine/core'
+import { Button, Card, Collapse, Group } from '@mantine/core'
 import { TextArea, Rating, Select } from '@app/index'
+import { useDisclosure } from '@mantine/hooks'
 
 import { useForm, useFieldArray } from 'react-hook-form'
 import { useEffect } from 'react'
@@ -17,6 +18,7 @@ const FeedbackForm = ({ onSave, lectures }) => {
       assessmentValues: [{ key: '', value: '5', text: '' }],
     },
   })
+  const [opened, { toggle }] = useDisclosure(false)
 
   const { fields, append, prepend, remove } = useFieldArray({
     control,
@@ -52,64 +54,73 @@ const FeedbackForm = ({ onSave, lectures }) => {
         data={lectures?.map((i) => ({ label: i.title, value: i._id })) || []}
         register={register}
       />
-      {fields.map((field, index) => (
-        <div key={field.id}>
-          <br />
-          <Card>
-            <Select
-              control={control}
-              nothingFound="Nothing found"
-              name={`assessmentValues.${index}.key`}
-              searchable
-              // creatable
-              data={[
-                { label: 'Behavior', value: 'behavior' },
-                { label: 'Focus', value: 'focus' },
-              ]}
-              error={errors[`assessmentValues.${index}.key`]?.message}
-              rules={{ required: 'This field is required' }}
-              placeholder="Text"
-              label="Area"
-            />
-            <br />
-            <Rating
-              control={control}
-              name={`assessmentValues[${index}].value`}
-              // error={errors[`assessment[${index}].value`]?.message}
-              label="Rate "
-              placeholder="Pick one"
-              minRows={5}
-              maxRows={10}
-              register={register}
-              defaultValue={5}
-              count={10}
-            />
-            <br />
-            <TextArea
-              control={control}
-              name={`assessmentValues[${index}].text`}
-              placeholder="Text"
-              label="Text"
-              minRows={5}
-              maxRows={10}
-              register={register}
-            />
-            <br />
-          </Card>
+      {!opened && <Button onClick={toggle}>Assessment</Button>}
 
-          <div className="btn-box">
-            {fields.length !== 1 && (
-              <Button onClick={() => remove(index)}>Remove</Button>
-            )}
-            {fields.length - 1 === index && (
-              <Button onClick={() => append({ key: '', value: '5', text: '' })}>
-                Add
-              </Button>
-            )}
+      <Collapse in={opened}>
+        {fields.map((field, index) => (
+          <div key={field.id}>
+            <br />
+            <Card>
+              <Select
+                control={control}
+                nothingFound="Nothing found"
+                name={`assessmentValues.${index}.key`}
+                searchable
+                // creatable
+                data={[
+                  { label: 'Behavior', value: 'behavior' },
+                  { label: 'Focus', value: 'focus' },
+                ]}
+                error={errors[`assessmentValues.${index}.key`]?.message}
+                rules={{ required: 'This field is required' }}
+                placeholder="Text"
+                label="Area"
+              />
+              <br />
+              <Rating
+                control={control}
+                name={`assessmentValues[${index}].value`}
+                // error={errors[`assessment[${index}].value`]?.message}
+                label="Rate "
+                placeholder="Pick one"
+                minRows={5}
+                maxRows={10}
+                register={register}
+                defaultValue={5}
+                count={10}
+              />
+              <br />
+              <TextArea
+                control={control}
+                name={`assessmentValues[${index}].text`}
+                placeholder="Text"
+                label="Text"
+                minRows={5}
+                maxRows={10}
+                register={register}
+              />
+              <br />
+            </Card>
+
+            <div className="btn-box">
+              {fields.length !== 1 && (
+                <Button onClick={() => remove(index)}>Remove</Button>
+              )}
+              {fields.length - 1 === index && (
+                <Button
+                  onClick={() => append({ key: '', value: '5', text: '' })}
+                >
+                  Add
+                </Button>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
-      <Button type="submit">Submit</Button>
+        ))}
+      </Collapse>
+      <br />
+      <Group position="center">
+        <Button type="submit">Submit</Button>
+      </Group>
     </form>
   )
 }
