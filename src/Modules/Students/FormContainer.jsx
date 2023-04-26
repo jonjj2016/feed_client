@@ -25,7 +25,6 @@ const StudentsContainer = ({ process, btntxt }) => {
   )
   // temp solution befor making it in back
   const { data: groupData, error: getGroupError } = useGet(constants.GROUPS, id)
-  const dd = useFigbird(constants.GROUPS, id)
   const onSave = async (reset, formValues) => {
     if (process === 'create') {
       const student = await create({
