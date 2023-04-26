@@ -45,13 +45,13 @@ const StudentForm = ({ onSave, data, onDelete }) => {
         icon={<IconUser />}
       />
       <br />
-      {/* <DatePicker
+      <DatePicker
         control={control}
         name="dob"
         error={errors['dob']?.message}
         label="Day of Birth"
-      /> */}
-      <Input
+      />
+      {/* <Input
         control={control}
         label="Day of Birth"
         name="dob"
@@ -59,7 +59,7 @@ const StudentForm = ({ onSave, data, onDelete }) => {
         placeholder="Date of birth"
         autosize
         icon={<IconUser />}
-      />
+      /> */}
       <br />
       <button type="submit">{params?.id ? 'Update' : 'Submit'}</button>
       {state.updateId && (

@@ -5,12 +5,13 @@ import { useSelector } from 'react-redux'
 import { useMutation, useGet } from 'figbird'
 import { notifications } from '@mantine/notifications'
 import { useParams, useNavigate } from 'react-router-dom'
+import useFigbird from '@hooks/useFigbird'
 
 import constants from '@constants/index'
 import ModalWrapper from '@app/Modal'
 import StudentForm from './Form'
 
-const StudentsContainer = ({ process }) => {
+const StudentsContainer = ({ process, btntxt }) => {
   const { id } = useParams()
 
   const { open, match, close, params } = useModalNavigate()
@@ -22,22 +23,20 @@ const StudentsContainer = ({ process }) => {
   const { patch: groupsPatch, error: groupsError } = useMutation(
     constants.GROUPS,
   )
-  useEffect(() => {}, [groupsError])
   // temp solution befor making it in back
   const { data: groupData, error: getGroupError } = useGet(constants.GROUPS, id)
-
+  const dd = useFigbird(constants.GROUPS, id)
   const onSave = async (reset, formValues) => {
     if (process === 'create') {
       const student = await create({
         ...formValues,
         createdBy: userId,
       })
-
-      if (student) {
+      console.log(groupData)
+      if (student && groupData) {
         const tt = await groupsPatch(id, {
           participantIds: [...groupData.participantIds, student._id],
         })
-        console.log('🚀 ~ file: FormContainer.jsx:47 ~ onSave ~ tt:', tt)
       }
       notifications.show({
         title: 'Congratulations',
@@ -82,7 +81,7 @@ const StudentsContainer = ({ process }) => {
         <StudentForm data={data} onSave={onSave} onDelete={onDelete} />
       </ModalWrapper>
       <Button variant="default" onClick={() => open(constants.CURRICULA)}>
-        {process == 'create' ? 'Create Student' : 'Open'}
+        {btntxt || process == 'create' ? 'Create Student' : 'Open'}
       </Button>
       <br />
       <br />

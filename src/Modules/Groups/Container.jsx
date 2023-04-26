@@ -7,7 +7,6 @@ import GroupStudents from './app/GroupStudents'
 import FeedbackForm from '@modules/FeedBacks/Container'
 import { notifications } from '@mantine/notifications'
 import StudentsTransferList from '@modules/Students/TransferList'
-
 import StudentCreate from '@modules/Students/FormContainer'
 import { Tabs } from '@mantine/core'
 import { IconPhoto, IconUserEdit } from '@tabler/icons-react'
