@@ -1,7 +1,8 @@
 import React from 'react'
+import LecturesContainer from '@modules/Lectures/Container'
 
 const Lectures = () => {
-  return <div>Lectures</div>
+  return <LecturesContainer />
 }
 
 export default Lectures

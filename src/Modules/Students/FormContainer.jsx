@@ -10,7 +10,7 @@ import constants from '@constants/index'
 import ModalWrapper from '@app/Modal'
 import StudentForm from './Form'
 
-const CurriculumContainer = ({ process }) => {
+const StudentsContainer = ({ process }) => {
   const { id } = useParams()
 
   const { open, match, close, params } = useModalNavigate()
@@ -32,14 +32,7 @@ const CurriculumContainer = ({ process }) => {
         ...formValues,
         createdBy: userId,
       })
-      console.log(student)
-      // if (error) {
-      //   notifications.show({
-      //     title: error.message,
-      //     color: 'red',
-      //     message: error.message,
-      //   })
-      // }
+
       if (student) {
         const tt = await groupsPatch(id, {
           participantIds: [...groupData.participantIds, student._id],
@@ -84,7 +77,7 @@ const CurriculumContainer = ({ process }) => {
       <ModalWrapper
         opened={match(constants.CURRICULA)}
         onClose={close}
-        title="Student Feedback"
+        title="Add Student"
       >
         <StudentForm data={data} onSave={onSave} onDelete={onDelete} />
       </ModalWrapper>
@@ -97,4 +90,4 @@ const CurriculumContainer = ({ process }) => {
   )
 }
 
-export default CurriculumContainer
+export default StudentsContainer
