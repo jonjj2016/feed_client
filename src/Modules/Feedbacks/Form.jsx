@@ -49,16 +49,8 @@ const FeedbackForm = ({ onSave, lectures }) => {
         nothingFound="Nothing found"
         dropdownPosition="bottom"
         multiple
-        // creatable
         data={lectures?.map((i) => ({ label: i.title, value: i._id })) || []}
         register={register}
-        // getCreateLabel={(query) => `+ Create ${query}`}
-        // onCreate={(query) => {
-        //   console.log(query)
-        //   const item = { value: query, label: query }
-        //   setData((current) => [...current, item])
-        //   return item
-        // }}
       />
       {fields.map((field, index) => (
         <div key={field.id}>
