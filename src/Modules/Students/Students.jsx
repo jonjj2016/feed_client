@@ -1,7 +1,7 @@
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import { useEffect, useState } from 'react'
 import constants from 'src/Constants/index'
-import { Button, ActionIcon, Table } from '@mantine/core'
+import { Container, ActionIcon, Table } from '@mantine/core'
 import { useMutation, useFind } from 'figbird'
 import { useNavigate } from 'react-router-dom'
 import { IconSettings, IconTrash } from '@tabler/icons-react'
@@ -56,7 +56,7 @@ const Students = ({}) => {
   ))
 
   return (
-    <div>
+    <Container size="md">
       <Form process="create" btntxt="Create Student" />
       <Table highlightOnHover striped>
         <thead>
@@ -69,7 +69,7 @@ const Students = ({}) => {
         </thead>
         <tbody>{rows}</tbody>
       </Table>
-    </div>
+    </Container>
   )
 }
 

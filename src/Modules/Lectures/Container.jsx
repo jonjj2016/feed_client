@@ -4,6 +4,7 @@ import Form from './Form'
 import useModalNavigate from '@hooks/useModalRouter'
 import constants from '@constants/index'
 import LecturesList from './LecturesList'
+import { Container } from '@mantine/core'
 import {
   useNavigate,
   useLocation,
@@ -11,12 +12,12 @@ import {
   useParams,
 } from 'react-router-dom'
 
-const Container = () => {
+const LecturesScreen = () => {
   const { open, match, close } = useModalNavigate()
   const { pathname, hash, state } = useLocation()
   console.log(match(constants.LECTURES), hash)
   return (
-    <div>
+    <Container>
       <ModalWrapper
         opened={match(constants.LECTURES)}
         onClose={close}
@@ -28,8 +29,8 @@ const Container = () => {
       {/* <Button variant="default" onClick={() => open(constants.FEEDBACKS)}>
         Open
       </Button> */}
-    </div>
+    </Container>
   )
 }
 
-export default Container
+export default LecturesScreen

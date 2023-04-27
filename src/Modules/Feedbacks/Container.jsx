@@ -18,7 +18,7 @@ const FeedBacks = () => {
   })
   const { userId } = useSelector((state) => state.global)
 
-  const { create, patch, feedBackMutatePatch } = useMutation(
+  const { create, patch, feedBackMutatePatch, error } = useMutation(
     constants.FEEDBACKS,
   )
   useEffect(() => {
@@ -32,6 +32,13 @@ const FeedBacks = () => {
       })
     }
   }, [feedBackMutatePatch])
+  useEffect(() => {
+    notifications.show({
+      title: 'Error',
+      color: 'red',
+      message: 'Something went wrong',
+    })
+  }, [error])
   const onSave = async (reset, formValues) => {
     const data = { ...formValues, student: studentId, instructorId: userId }
     const feedBack = await create(data)

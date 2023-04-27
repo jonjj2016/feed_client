@@ -1,6 +1,7 @@
 import React from 'react'
 import { useFind, useGet } from 'figbird'
 import { Text, Avatar, Group, rem, Button } from '@mantine/core'
+import { Container } from '@mantine/core'
 
 import constants from '@constants/index'
 import { useParams } from 'react-router-dom'
@@ -15,7 +16,7 @@ const StudentDetails = () => {
   } = useFind(constants.FEEDBACKS, { query: { student: id } })
 
   return (
-    <div>
+    <Container>
       <Group>
         <Avatar src={''} alt={data?.fName} radius="xl" />
         <div>
@@ -37,7 +38,7 @@ const StudentDetails = () => {
             data={feedback.assessmentValues}
           />
         ))}
-    </div>
+    </Container>
   )
 }
 

@@ -3,7 +3,7 @@ import FormContainer from './FormContainer'
 import CurriculumList from './app/CurriculumList'
 import { useMutation, useGet, useFind } from 'figbird'
 import useModalNavigate from 'src/Hooks/useModalRouter'
-
+import { Container } from '@mantine/core'
 import constants from '@constants/index'
 import { notifications } from '@mantine/notifications'
 import { useNavigate } from 'react-router-dom'
