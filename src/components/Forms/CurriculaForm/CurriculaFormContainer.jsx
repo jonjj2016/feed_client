@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import StudentFormComponent from './CurriculaFormComponent'
+import CurriculaFormComponent from './CurriculaFormComponent'
 import { useSelector } from 'react-redux'
 import { useMutation, useGet } from 'figbird'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import useModalNavigate from 'src/Hooks/useModalRouter'
 
 import { notifications } from '@mantine/notifications'
@@ -12,55 +12,52 @@ const CurriculaFormContainer = () => {
   let [searchParams] = useSearchParams()
   const { close } = useModalNavigate()
 
-  const groupId = searchParams.get('groupId')
-  const studentId = searchParams.get('studentId')
+  const curriculaId = searchParams.get('curriculaId')
 
-  const { create, patch, error: mutationError } = useMutation(types.STUDENTS)
-  const { patch: groupsPatch, error: groupsError } = useMutation(types.GROUPS)
-  const { data: groupData, error: getGroupError } = useGet(
-    types.GROUPS,
-    groupId,
-    { skip: !groupId },
+  const { create, patch, error: mutationError } = useMutation(types.CURRICULA)
+
+  const { data: curriculaData, getError } = useGet(
+    types.CURRICULA,
+    curriculaId,
+    {
+      skip: !curriculaId,
+    },
   )
-  const { data: studentData } = useGet(types.STUDENTS, studentId, {
-    skip: !studentId,
-  })
 
   // temp solutions userId to be real userId
   const { userId } = useSelector((state) => state.global)
 
   const onSubmit = async (reset, formValues) => {
-    if (!studentId) {
-      const student = await create({
+    if (!curriculaId) {
+      await create({
         ...formValues,
         createdBy: userId,
       })
-      if (student && groupId) {
-        await groupsPatch(groupId, {
-          participantIds: [...groupData.participantIds, student._id],
-        })
-      }
+
       notifications.show({
         autoClose: 1500,
-        title: 'Congratulations',
-        message: 'Successfully created Student',
+        title: 'Created',
+        message: 'Successfully created Curricula',
+        color: 'green',
+      })
+    } else {
+      await patch(curriculaId, formValues)
+      notifications.show({
+        autoClose: 1500,
+        title: 'Updated',
+        message: 'Successfully Updated',
         color: 'green',
       })
     }
-    if (groupId) {
-      await patch(groupId, formValues, { new: true })
-    }
     reset({
-      fName: '',
-      lName: '',
-      dob: '',
-      dobEstimate: '',
+      title: '',
+      text: '',
+      teaser: '',
     })
     close()
   }
   useEffect(() => {
-    let err =
-      groupsError?.message || mutationError?.message || getGroupError?.message
+    let err = getError?.message || mutationError?.message
     if (err) {
       notifications.show({
         title: err,
@@ -68,8 +65,8 @@ const CurriculaFormContainer = () => {
         message: err,
       })
     }
-  }, [mutationError, groupsError])
-  return <StudentFormComponent onSubmit={onSubmit} data={studentData} />
+  }, [mutationError, getError])
+  return <CurriculaFormComponent onSubmit={onSubmit} data={curriculaData} />
 }
 
 export default CurriculaFormContainer

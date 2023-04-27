@@ -1,8 +1,8 @@
 import { Modal } from '@mantine/core'
 import PropTypes from 'prop-types'
-import LecturesForm from '@app/Forms/lecturesForm/LecturesFormContainer'
+import LecturesForm from '@app/Forms/curriculaForm/CurriculaFormContainer'
 
-const LecturesModal = ({ ...props }) => {
+const CurriculaModal = ({ ...props }) => {
   return (
     <Modal {...props}>
       <LecturesForm />
@@ -10,8 +10,8 @@ const LecturesModal = ({ ...props }) => {
   )
 }
 
-LecturesModal.propTypes = {
+CurriculaModal.propTypes = {
   props: PropTypes.array,
 }
 
-export default LecturesModal
+export default CurriculaModal

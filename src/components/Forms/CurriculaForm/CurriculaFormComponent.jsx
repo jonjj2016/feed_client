@@ -2,12 +2,11 @@
 import { useForm } from 'react-hook-form'
 import PropTypes from 'prop-types'
 import Input from 'src/components/UI/Input/Controller'
-import DatePicker from 'src/components/UI/DatePicker/Controller'
-import { IconUser } from '@tabler/icons-react'
+import { IconAB2, IconFileTextAi, IconHeading } from '@tabler/icons-react'
 import { useEffect } from 'react'
 import { Button } from '@mantine/core'
 
-const CurriculaForm = ({ onSubmit, data }) => {
+const LecturesForm = ({ onSubmit, data }) => {
   const {
     handleSubmit,
     setValue,
@@ -31,41 +30,43 @@ const CurriculaForm = ({ onSubmit, data }) => {
     >
       <Input
         control={control}
-        label="First Name"
-        name="fName"
-        error={errors['fName']?.message}
+        label="Title"
+        name="title"
+        error={errors['title']?.message}
         rules={{ required: 'First Name is required' }}
-        placeholder="Enter First here"
-        icon={<IconUser />}
+        placeholder="Enter Title here"
+        // description="Type your curricula title"
+        icon={<IconHeading />}
       />
       <br />
 
       <Input
         control={control}
-        label="Last Name"
-        name="lName"
-        error={errors['lName']?.message}
-        rules={{ required: 'Last Name is required' }}
-        placeholder="Last name here"
-        autosize
-        icon={<IconUser />}
+        name="text"
+        error={errors['text']?.message}
+        rules={{ required: 'Text is required' }}
+        placeholder="Text"
+        label="Text"
+        icon={<IconFileTextAi />}
       />
       <br />
-      <DatePicker
+      <Input
         control={control}
-        name="dob"
-        error={errors['dob']?.message}
-        label="Day of Birth"
+        name="teaser"
+        error={errors['text']?.message}
+        rules={{ required: 'Teaser is required' }}
+        placeholder="Type teaser here"
+        label="Teaser"
+        icon={<IconAB2 />}
       />
-
       <br />
-      <Button type="submit"> Submit</Button>
+      <Button type="submit">Submit</Button>
     </form>
   )
 }
-CurriculaForm.propTypes = {
+LecturesForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   data: PropTypes.object,
 }
 
-export default CurriculaForm
+export default LecturesForm

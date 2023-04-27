@@ -4,9 +4,7 @@ import constants from 'src/ModalTypes/index'
 import useModalNavigate from '@hooks/useModalRouter'
 import { useGet, useFind, useMutation } from 'figbird'
 import GroupStudents from './app/GroupStudents'
-import FeedbackForm from '@modules/feedbacks/Container'
 import { notifications } from '@mantine/notifications'
-import StudentCreate from '@modules/students/FormContainer'
 import { Tabs } from '@mantine/core'
 import { IconPhoto, IconUserEdit } from '@tabler/icons-react'
 
@@ -67,7 +65,6 @@ const GroupDetails = () => {
 
   return (
     <div>
-      <FeedbackForm />
       <Tabs defaultValue="students">
         <Tabs.List>
           <Tabs.Tab value="dashboard" icon={<IconPhoto size="0.8rem" />}>
@@ -109,10 +106,6 @@ const GroupDetails = () => {
           </Button>
           <br />
           <br />
-          {/* <StudentsTransferList
-            studentsList={studentData || []}
-            groupData={groupData || []}
-          /> */}
           <GroupStudents
             onFeedBack={onFeedBack}
             onDelete={onDelete}

@@ -1,34 +1,46 @@
-import { Button, Card, Collapse, Group } from '@mantine/core'
-import { TextArea, Rating, Select } from 'src/components/index'
+// import Input from '@components/Base/UI/Input'
+import PropTypes from 'prop-types'
+import Input from 'src/components/UI/Input/Controller'
+import { IconHeading } from '@tabler/icons-react'
+import { Card, Collapse, Group } from '@mantine/core'
+import { Rating, Select } from 'src/components/index'
 import { useDisclosure } from '@mantine/hooks'
-
 import { useForm, useFieldArray } from 'react-hook-form'
-import { useEffect } from 'react'
 
-const FeedbackForm = ({ onSave, lectures }) => {
+import TextArea from 'src/components/UI/TextArea/Controller'
+import { useEffect } from 'react'
+import { Button } from '@mantine/core'
+
+const CurriculaForm = ({ onSubmit, data, lectures }) => {
   const {
-    register,
     handleSubmit,
+    setValue,
+    reset,
     formState: { errors },
     control,
-    setData,
-    reset,
   } = useForm({
     defaultValues: {
       assessmentValues: [{ key: '', value: '5', text: '' }],
     },
   })
-  const [opened, { toggle }] = useDisclosure(false)
 
+  useEffect(() => {
+    if (data) {
+      Object.keys(data).map((key) => {
+        setValue(key, data[key])
+      })
+    }
+  }, [data])
+  const [opened, { toggle }] = useDisclosure(false)
   const { fields, append, prepend, remove } = useFieldArray({
     control,
     name: 'assessmentValues',
   })
-  const onFormSave = (values) => {
-    onSave(reset, values)
-  }
   return (
-    <form onSubmit={handleSubmit(onFormSave)}>
+    <form
+      style={{ display: 'flex', flexDirection: 'column' }}
+      onSubmit={handleSubmit((vals) => onSubmit(reset, vals))}
+    >
       <TextArea
         control={control}
         name={`text`}
@@ -52,7 +64,6 @@ const FeedbackForm = ({ onSave, lectures }) => {
         dropdownPosition="bottom"
         multiple
         data={lectures?.map((i) => ({ label: i.title, value: i._id })) || []}
-        register={register}
       />
       {!opened && <Button onClick={toggle}>Assessment</Button>}
 
@@ -85,7 +96,6 @@ const FeedbackForm = ({ onSave, lectures }) => {
                 placeholder="Pick one"
                 minRows={5}
                 maxRows={10}
-                register={register}
                 defaultValue={5}
                 count={10}
               />
@@ -97,7 +107,6 @@ const FeedbackForm = ({ onSave, lectures }) => {
                 label="Text"
                 minRows={5}
                 maxRows={10}
-                register={register}
               />
               <br />
             </Card>
@@ -117,12 +126,15 @@ const FeedbackForm = ({ onSave, lectures }) => {
           </div>
         ))}
       </Collapse>
+
       <br />
-      <Group position="center">
-        <Button type="submit">Submit</Button>
-      </Group>
+      <Button type="submit"> Submit</Button>
     </form>
   )
 }
+CurriculaForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  data: PropTypes.object,
+}
 
-export default FeedbackForm
+export default CurriculaForm

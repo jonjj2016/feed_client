@@ -47,10 +47,9 @@ const LecturesFormContainer = () => {
     }
 
     reset({
-      fName: '',
-      lName: '',
-      dob: '',
-      dobEstimate: '',
+      title: '',
+      text: '',
+      teaser: '',
     })
     close()
   }
