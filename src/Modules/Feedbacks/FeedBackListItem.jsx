@@ -8,10 +8,12 @@ import {
   rem,
   Rating,
 } from '@mantine/core'
-import FeedbackForm from 'src/components/Forms/FeedBackForm'
+// import FeedbackForm from 'src/components/Forms/FeedBackForm'
 import { useDisclosure } from '@mantine/hooks'
-import { useMutation, useFind } from 'figbird'
-import constants from 'src/ModalTypes/index'
+import useModalNavigate from '@hooks/useModalRouter'
+import { useParams } from 'react-router-dom'
+
+import types from 'src/ModalTypes/index'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -44,14 +46,9 @@ const useStyles = createStyles((theme) => ({
 
 const FeedBackListItem = ({ title, description, data, feedback }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
-  const { patch, error } = useMutation(constants.FEEDBACKS)
+  const { id: studentId } = useParams()
   const { classes } = useStyles()
-  const onFeedbackSave = async (reset, values) => {
-    await patch(values._id, values)
-    reset()
-    close()
-    console.log(values)
-  }
+  const { open } = useModalNavigate()
   const items = data.map((item) => (
     <Group position="apart" className={classes.item} noWrap spacing="xl">
       <div>
@@ -67,7 +64,11 @@ const FeedBackListItem = ({ title, description, data, feedback }) => {
   return (
     <>
       <Card
-        onClick={toggle}
+        onClick={() =>
+          open(types.FEEDBACKS, {
+            search: `studentId=${studentId}&feedBackId=${feedback._id}`,
+          })
+        }
         withBorder
         radius="md"
         p="xl"
@@ -83,11 +84,11 @@ const FeedBackListItem = ({ title, description, data, feedback }) => {
       </Card>
       <br />
       <Collapse in={opened}>
-        <FeedbackForm
+        {/* <FeedbackForm
           defaultValue={feedback}
           onSave={onFeedbackSave}
           lectures={[]}
-        />
+        /> */}
       </Collapse>
       <br />
     </>
