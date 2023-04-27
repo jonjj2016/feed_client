@@ -1,4 +1,4 @@
-import CurriculumContainer from 'src/Modules/Curricula/Screen'
+import CurriculumContainer from '@modules/curricula/Screen'
 
 const Curriculums = () => {
   return <CurriculumContainer />

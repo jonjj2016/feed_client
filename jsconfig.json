@@ -17,15 +17,15 @@
     "baseUrl": "./",
     "paths": {
       "@assets/*": ["src/Assets/*"],
-      "@app/*": ["src/app/*"],
-      "@components/*": ["src/app/*"],
-      "@pages/*": ["src/Pages/*"],
-      "@state/*": ["src/State/*"],
-      "@modals/*": ["src/app/Modals/*"],
+      "@app/*": ["src/components/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@state/*": ["src/redux/*"],
+      "@modals/*": ["src/components/Modals/*"],
       "@hooks/*": ["src/Hooks/*"],
-      "@constants/*": ["src/Constants/*"],
+      "@constants/*": ["src/ModalTypes/*"],
       "@utils/*": ["src/Utils/*"],
-      "@modules/*": ["src/Modules/*"]
+      "@modules/*": ["src/modules/*"]
     }
   },
   "include": [

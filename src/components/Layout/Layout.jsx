@@ -11,9 +11,10 @@ import {
   Box,
 } from '@mantine/core'
 import MyNavBar from './Navbar'
-import { setMode } from '@state/index'
+import { setMode } from 'src/redux/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { IconMoon, IconSun } from '@tabler/icons-react'
+import CoreModal from '@app/modals/Core'
 
 const Layout = () => {
   const { mode } = useSelector((state) => state.global)
@@ -36,6 +37,7 @@ const Layout = () => {
         <Navbar hidden={false} width={{ base: 300 }} p="xs">
           <Navbar.Section grow component={ScrollArea} mx="-xs" px="xs">
             <MyNavBar />
+            <CoreModal />
             {/* <Divider my="sm" /> */}
           </Navbar.Section>
         </Navbar>

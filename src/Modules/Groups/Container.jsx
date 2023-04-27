@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { Button, Text, Title, Table } from '@mantine/core'
-import constants from 'src/Constants/index'
+import constants from 'src/ModalTypes/index'
 import useModalNavigate from '@hooks/useModalRouter'
 import { useGet, useFind, useMutation } from 'figbird'
 import GroupStudents from './app/GroupStudents'
-import FeedbackForm from '@modules/FeedBacks/Container'
+import FeedbackForm from '@modules/feedbacks/Container'
 import { notifications } from '@mantine/notifications'
-import StudentCreate from '@modules/Students/FormContainer'
+import StudentCreate from '@modules/students/FormContainer'
 import { Tabs } from '@mantine/core'
 import { IconPhoto, IconUserEdit } from '@tabler/icons-react'
 
@@ -21,13 +21,14 @@ const GroupDetails = () => {
   )
   const { data: groupData, error: groupGetError } = useGet(constants.GROUPS, id)
 
-  var { data: studentData, error: studentError } = useFind(constants.STUDENTS, {
-    query: { _id: groupData?.participantIds },
-  })
-
-  const { data: allStudents, error: allStudentsError } = useFind(
+  var { data: studentData, error: studentError } = useFind(
     constants.STUDENTS,
+    {
+      query: { _id: groupData?.participantIds },
+    },
+    { skip: groupData?.participantIds.length },
   )
+
   useEffect(() => {
     let err =
       studentError?.message ||
@@ -103,7 +104,11 @@ const GroupDetails = () => {
           </Button>
         </Tabs.Panel>
         <Tabs.Panel value="students" pt="xs">
-          <StudentCreate process="create" btntxt="Create Student" />
+          <Button variant="default" onClick={() => open(constants.STUDENTS)}>
+            Create Student
+          </Button>
+          <br />
+          <br />
           {/* <StudentsTransferList
             studentsList={studentData || []}
             groupData={groupData || []}

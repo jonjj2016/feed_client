@@ -2,10 +2,10 @@
 import { useForm } from 'react-hook-form'
 import { useMutation, useGet } from 'figbird'
 import { useState, useEffect } from 'react'
-import constants from 'src/Constants/index'
+import constants from 'src/ModalTypes/index'
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import { useSelector } from 'react-redux'
-import Input from '@app/UI/Input/Controller'
+import Input from 'src/components/UI/Input/Controller'
 import { IconAB2, IconFileTextAi, IconHeading } from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
 
@@ -49,7 +49,7 @@ const LecturesForm = () => {
 
   const onDelete = async (data) => {
     if (state.updateId) {
-      await patch(state.updateId, { isDeleted: true }, { new: true })
+      await patch(state.updateId, { new: true })
       close()
     }
   }

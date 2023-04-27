@@ -1,16 +1,14 @@
 import { Button, Card, Collapse, Group } from '@mantine/core'
-import { TextArea, Rating, Select } from '@app/index'
+import { TextArea, Rating, Select } from 'src/components/index'
 import { useDisclosure } from '@mantine/hooks'
-import constants from '@constants/index'
+import constants from 'src/ModalTypes/index'
 import { useFind } from 'figbird'
 
 import { useForm, useFieldArray } from 'react-hook-form'
 import { useEffect } from 'react'
 
 const FeedbackForm = ({ onSave, defaultValue }) => {
-  const { data: lectures } = useFind(constants.LECTURES, {
-    query: { $sort: '-createdAt', isDeleted: false },
-  })
+  const { data: lectures } = useFind(constants.LECTURES)
   const {
     register,
     setValue,

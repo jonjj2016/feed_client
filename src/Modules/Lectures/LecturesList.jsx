@@ -1,6 +1,6 @@
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import { useEffect, useState } from 'react'
-import constants from 'src/Constants/index'
+import constants from 'src/ModalTypes/index'
 import { Button, ActionIcon, Table } from '@mantine/core'
 import { useMutation, useFind } from 'figbird'
 
@@ -8,13 +8,10 @@ import { IconSettings, IconTrash } from '@tabler/icons-react'
 
 const Lectures = () => {
   const { open } = useModalNavigate()
-  const { data, isFetching } = useFind(constants.LECTURES, {
-    query: { isDeleted: false },
-  })
+  const { data, isFetching } = useFind(constants.LECTURES, {})
   const { patch } = useMutation(constants.LECTURES)
 
-  const [elements, setElements] = useState([])
-  const rows = elements.map((element) => (
+  const rows = data?.map((element) => (
     <tr style={{ cursor: 'pointer' }} key={element._id}>
       <td>{element.title}</td>
       <td>{element.teaser}</td>
@@ -25,7 +22,7 @@ const Lectures = () => {
           onClick={() => {
             open(`${constants.LECTURES}`, {
               state: { update: element._id, element },
-              search: `updateId=${element._id}&new=true`,
+              search: `lectureId=${element._id}`,
             })
           }}
         >
@@ -35,7 +32,7 @@ const Lectures = () => {
       <td>
         <ActionIcon
           onClick={async () => {
-            await patch(element._id, { isDeleted: true }, { new: true })
+            await patch(element._id, { new: true })
           }}
         >
           <IconTrash size="1.125rem" />
@@ -44,17 +41,8 @@ const Lectures = () => {
     </tr>
   ))
 
-  useEffect(() => {
-    if (!isFetching && data) {
-      setElements(data)
-    }
-  }, [data])
-
   return (
     <div>
-      <Button onClick={() => open(constants.LECTURES)} variant="default">
-        Create
-      </Button>
       <Table highlightOnHover striped>
         <thead>
           <tr>

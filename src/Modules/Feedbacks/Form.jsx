@@ -1,5 +1,5 @@
 import { Button, Card, Collapse, Group } from '@mantine/core'
-import { TextArea, Rating, Select } from '@app/index'
+import { TextArea, Rating, Select } from 'src/components/index'
 import { useDisclosure } from '@mantine/hooks'
 
 import { useForm, useFieldArray } from 'react-hook-form'

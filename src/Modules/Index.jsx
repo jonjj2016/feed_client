@@ -1,1 +1,1 @@
-export { default as FeedBackModule } from './FeedBacks/Container'
+export { default as FeedBackModule } from './feedbacks/Container'

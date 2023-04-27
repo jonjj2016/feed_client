@@ -4,15 +4,13 @@ import CurriculumList from './app/CurriculumList'
 import { useMutation, useGet, useFind } from 'figbird'
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import { Container } from '@mantine/core'
-import constants from '@constants/index'
+import constants from 'src/ModalTypes/index'
 import { notifications } from '@mantine/notifications'
 import { useNavigate } from 'react-router-dom'
 
 const Screen = () => {
   const navigate = useNavigate()
-  const { data, error, isFetching } = useFind(constants.CURRICULA, {
-    query: { isDeleted: false },
-  })
+  const { data, error, isFetching } = useFind(constants.CURRICULA, {})
   const { patch, error: mutationError } = useMutation(constants.CURRICULA)
   const { open, match, close, params } = useModalNavigate()
   useEffect(() => {
@@ -34,7 +32,7 @@ const Screen = () => {
   }, [])
   const onEdit = (id) => navigate(`/${constants.CURRICULA}/${id}#curricula`)
   const onDelete = async (id) => {
-    await patch(id, { isDeleted: true }, { new: true })
+    await patch(id)
     notifications.show({
       title: 'Successfully deleted',
       color: 'green',

@@ -1,6 +1,6 @@
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import { useEffect, useState } from 'react'
-import constants from 'src/Constants/index'
+import constants from 'src/ModalTypes/index'
 import { Container, ActionIcon, Table } from '@mantine/core'
 import { useMutation, useFind } from 'figbird'
 import { useNavigate } from 'react-router-dom'
@@ -11,9 +11,7 @@ import { notifications } from '@mantine/notifications'
 const Students = ({}) => {
   const navigate = useNavigate()
   const { open } = useModalNavigate()
-  const { data, error } = useFind(constants.STUDENTS, {
-    query: { isDeleted: false },
-  })
+  const { data, error } = useFind(constants.STUDENTS, {})
   const { patch } = useMutation(constants.STUDENTS)
   useEffect(() => {
     if (error) {
@@ -46,7 +44,7 @@ const Students = ({}) => {
       <td>
         <ActionIcon
           onClick={async () => {
-            await patch(element._id, { isDeleted: true }, { new: true })
+            await patch(element._id, { new: true })
           }}
         >
           <IconTrash size="1.125rem" />

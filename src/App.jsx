@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { lazy } from 'react'
 import { MantineProvider } from '@mantine/core'
 import { useSelector } from 'react-redux'
 import { Provider } from 'figbird'
-import feathersClient from '@state/feathersServices'
+import feathersClient from 'src/redux/feathersServices'
 import theme from './theme'
 import { Notifications } from '@mantine/notifications'
 
@@ -16,8 +17,18 @@ import {
   StudentDetails,
   FeedBacks,
   Dashboard,
-} from '@pages/index'
-import Layout from '@app/Layout/Layout'
+} from 'src/pages/index'
+// const Curricula = lazy(() => import("@pages"));
+// const Groups = lazy(() => import("@pages/Groups"));
+// const GroupDetails = lazy(() => import("@pages/GroupDetails"));
+// const CurriculaDetails = lazy(() => import("@pages/CurriculaDetails"));
+// const Lectures = lazy(() => import("@pages/Lectures"));
+// const Students = lazy(() => import("@pages/Students"));
+// const StudentDetails = lazy(() => import("@pages/StudentDetail"));
+// const FeedBacks = lazy(() => import("@pages/FeedBacks"));
+// const Dashboard = lazy(() => import("@pages/Dashboard"));
+
+import Layout from 'src/components/Layout/Layout'
 
 function App() {
   const { mode } = useSelector((state) => state.global)
@@ -32,7 +43,7 @@ function App() {
             ...theme,
           }}
         >
-          <Notifications />
+          <Notifications position="top-right" zIndex={2077} />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />
