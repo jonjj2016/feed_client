@@ -15,7 +15,7 @@ import {
   Lectures,
   Students,
   StudentDetails,
-  FeedBacks,
+  // FeedBacks,
   Dashboard,
 } from 'src/pages/index'
 // const Curricula = lazy(() => import("@pages"));
@@ -54,7 +54,7 @@ function App() {
               <Route path="/curricula" element={<Curricula />} />
               <Route path="/curricula/:id" element={<CurriculaDetails />} />
               <Route path="/lectures" element={<Lectures />} />
-              <Route path="/feedbacks" element={<FeedBacks />} />
+              {/* <Route path="/feedbacks" element={<FeedBacks />} /> */}
             </Route>
           </Routes>
         </MantineProvider>
