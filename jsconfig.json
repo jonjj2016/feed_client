@@ -25,6 +25,7 @@
       "@hooks/*": ["src/Hooks/*"],
       "@constants/*": ["src/ModalTypes/*"],
       "@utils/*": ["src/Utils/*"],
+      "@ui/*": ["src/components/ui_elements*"],
       "@modules/*": ["src/modules/*"]
     }
   },
