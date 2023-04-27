@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 import { useMutation, useGet } from 'figbird'
 import { notifications } from '@mantine/notifications'
 
-import constants from '@constants/index'
-import ModalWrapper from '@app/Modal'
+import constants from 'src/ModalTypes/index'
+import ModalWrapper from 'src/components/Modal'
 import CurriculumForm from './Form'
 
 const CurriculumContainer = ({ process }) => {
@@ -47,7 +47,7 @@ const CurriculumContainer = ({ process }) => {
   }, [mutationError])
   const onDelete = async (data) => {
     if (params?.id) {
-      await patch(params?.id, { isDeleted: true }, { new: true })
+      await patch(params?.id, { new: true })
       close()
     }
   }

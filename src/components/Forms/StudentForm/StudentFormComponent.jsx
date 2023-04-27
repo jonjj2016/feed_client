@@ -1,26 +1,33 @@
 // import Input from '@components/Base/UI/Input'
 import { useForm } from 'react-hook-form'
-import useModalNavigate from 'src/Hooks/useModalRouter'
-import Input from '@app/UI/Input/Controller'
-import DatePicker from '@app/UI/DatePicker/Controller'
-import { IconHeading, IconFileTextAi, IconUser } from '@tabler/icons-react'
+import PropTypes from 'prop-types'
+import Input from 'src/components/UI/Input/Controller'
+import DatePicker from 'src/components/UI/DatePicker/Controller'
+import { IconUser } from '@tabler/icons-react'
+import { useEffect } from 'react'
+import { Button } from '@mantine/core'
 
-const StudentForm = ({ onSave, data, onDelete }) => {
-  const { close, state, params } = useModalNavigate()
-
+const StudentForm = ({ onSubmit, data }) => {
   const {
-    register,
     handleSubmit,
     setValue,
     reset,
     formState: { errors },
     control,
-  } = useForm({ ...data })
+  } = useForm({})
+
+  useEffect(() => {
+    if (data) {
+      Object.keys(data).map((key) => {
+        setValue(key, data[key])
+      })
+    }
+  }, [data])
 
   return (
     <form
       style={{ display: 'flex', flexDirection: 'column' }}
-      onSubmit={handleSubmit((vals) => onSave(reset, vals))}
+      onSubmit={handleSubmit((vals) => onSubmit(reset, vals))}
     >
       <Input
         control={control}
@@ -52,15 +59,13 @@ const StudentForm = ({ onSave, data, onDelete }) => {
       />
 
       <br />
-      <button type="submit">{params?.id ? 'Update' : 'Submit'}</button>
-      {state.updateId && (
-        <>
-          <br />
-          <button onClick={onDelete}>Delete</button>
-        </>
-      )}
+      <Button type="submit"> Submit</Button>
     </form>
   )
+}
+StudentForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  data: PropTypes.object,
 }
 
 export default StudentForm

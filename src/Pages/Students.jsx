@@ -1,5 +1,5 @@
 import React from 'react'
-import Students from '@modules/Students/Students'
+import Students from '@modules/students/Students'
 const StudentsPage = () => {
   return <Students />
 }

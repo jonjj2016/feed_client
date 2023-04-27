@@ -8,10 +8,10 @@ import {
   rem,
   Rating,
 } from '@mantine/core'
-import FeedbackForm from '@app/Forms/FeedBackForm'
+import FeedbackForm from 'src/components/Forms/FeedBackForm'
 import { useDisclosure } from '@mantine/hooks'
 import { useMutation, useFind } from 'figbird'
-import constants from 'src/Constants/index'
+import constants from 'src/ModalTypes/index'
 
 const useStyles = createStyles((theme) => ({
   card: {

@@ -2,8 +2,8 @@ import { Button } from '@mantine/core'
 import { useFind, useMutation } from 'figbird'
 import { notifications } from '@mantine/notifications'
 import { useEffect } from 'react'
-import constants from '@constants/index'
-import ModalWrapper from '@app/Modal'
+import constants from 'src/ModalTypes/index'
+import ModalWrapper from 'src/components/Modal'
 import { useSelector } from 'react-redux'
 import FeedBackForm from './Form'
 import { useSearchParams } from 'react-router-dom'
@@ -14,7 +14,7 @@ const FeedBacks = () => {
   const studentId = searchParams.get('studentId')
   const { open, match, close } = useModalNavigate()
   const { data: lectures } = useFind(constants.LECTURES, {
-    query: { $sort: '-createdAt', isDeleted: false },
+    query: { $sort: '-createdAt' },
   })
   const { userId } = useSelector((state) => state.global)
 

@@ -1,8 +1,8 @@
 // import Input from '@components/Base/UI/Input'
 import { useForm } from 'react-hook-form'
 import useModalNavigate from 'src/Hooks/useModalRouter'
-import Input from '@app/UI/Input/Controller'
-import DatePicker from '@app/UI/DatePicker/Controller'
+import Input from 'src/components/UI/Input/Controller'
+import DatePicker from 'src/components/UI/DatePicker/Controller'
 import { IconHeading, IconFileTextAi, IconUser } from '@tabler/icons-react'
 
 const StudentForm = ({ onSave, data, onDelete }) => {
@@ -50,15 +50,7 @@ const StudentForm = ({ onSave, data, onDelete }) => {
         error={errors['dob']?.message}
         label="Day of Birth"
       />
-      {/* <Input
-        control={control}
-        label="Day of Birth"
-        name="dob"
-        error={errors['lName']?.message}
-        placeholder="Date of birth"
-        autosize
-        icon={<IconUser />}
-      /> */}
+
       <br />
       <button type="submit">{params?.id ? 'Update' : 'Submit'}</button>
       {state.updateId && (

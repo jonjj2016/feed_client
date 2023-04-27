@@ -1,8 +1,8 @@
 // import Input from '@components/Base/UI/Input'
 import { useForm } from 'react-hook-form'
 import useModalNavigate from 'src/Hooks/useModalRouter'
-import Input from '@app/UI/Input/Controller'
-import TextArea from '@app/UI/TextArea/Controller'
+import Input from 'src/components/UI/Input/Controller'
+import TextArea from 'src/components/UI/TextArea/Controller'
 import { IconHeading } from '@tabler/icons-react'
 
 const CurriculumForm = ({ onSave, data, onDelete }) => {
