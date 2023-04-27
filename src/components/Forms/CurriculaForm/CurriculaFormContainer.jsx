@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import StudentFormComponent from './CurriculaFormComponent'
+import CurriculaFormComponent from './CurriculaFormComponent'
 import { useSelector } from 'react-redux'
 import { useMutation, useGet } from 'figbird'
 import { useSearchParams } from 'react-router-dom'
@@ -16,9 +16,13 @@ const CurriculaFormContainer = () => {
 
   const { create, patch, error: mutationError } = useMutation(types.CURRICULA)
 
-  const { data: studentData, getError } = useGet(types.CURRICULA, curriculaId, {
-    skip: !curriculaId,
-  })
+  const { data: curriculaData, getError } = useGet(
+    types.CURRICULA,
+    curriculaId,
+    {
+      skip: !curriculaId,
+    },
+  )
 
   // temp solutions userId to be real userId
   const { userId } = useSelector((state) => state.global)
@@ -62,7 +66,7 @@ const CurriculaFormContainer = () => {
       })
     }
   }, [mutationError, getError])
-  return <StudentFormComponent onSubmit={onSubmit} data={studentData} />
+  return <CurriculaFormComponent onSubmit={onSubmit} data={curriculaData} />
 }
 
 export default CurriculaFormContainer

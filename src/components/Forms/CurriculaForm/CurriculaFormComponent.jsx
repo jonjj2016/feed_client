@@ -2,12 +2,11 @@
 import { useForm } from 'react-hook-form'
 import PropTypes from 'prop-types'
 import Input from 'src/components/UI/Input/Controller'
-import { IconHeading } from '@tabler/icons-react'
-import TextArea from 'src/components/UI/TextArea/Controller'
+import { IconAB2, IconFileTextAi, IconHeading } from '@tabler/icons-react'
 import { useEffect } from 'react'
 import { Button } from '@mantine/core'
 
-const CurriculaForm = ({ onSubmit, data }) => {
+const LecturesForm = ({ onSubmit, data }) => {
   const {
     handleSubmit,
     setValue,
@@ -34,42 +33,40 @@ const CurriculaForm = ({ onSubmit, data }) => {
         label="Title"
         name="title"
         error={errors['title']?.message}
-        rules={{ required: 'Title is required' }}
+        rules={{ required: 'First Name is required' }}
         placeholder="Enter Title here"
         // description="Type your curricula title"
         icon={<IconHeading />}
       />
       <br />
 
-      <TextArea
+      <Input
         control={control}
         name="text"
         error={errors['text']?.message}
         rules={{ required: 'Text is required' }}
         placeholder="Text"
         label="Text"
-        autosize
-        minRows={3}
+        icon={<IconFileTextAi />}
       />
       <br />
-      <TextArea
+      <Input
         control={control}
         name="teaser"
-        error={errors['teaser']?.message}
+        error={errors['text']?.message}
         rules={{ required: 'Teaser is required' }}
         placeholder="Type teaser here"
         label="Teaser"
-        autosize
-        minRows={3}
+        icon={<IconAB2 />}
       />
       <br />
-      <Button type="submit"> Submit</Button>
+      <Button type="submit">Submit</Button>
     </form>
   )
 }
-CurriculaForm.propTypes = {
+LecturesForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   data: PropTypes.object,
 }
 
-export default CurriculaForm
+export default LecturesForm

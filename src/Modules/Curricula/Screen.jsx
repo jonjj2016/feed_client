@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import FormContainer from './FormContainer'
 import CurriculumList from './app/CurriculumList'
 import { useMutation, useGet, useFind } from 'figbird'
 import useModalNavigate from 'src/Hooks/useModalRouter'
