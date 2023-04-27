@@ -3,8 +3,8 @@ import { useFind } from 'figbird'
 import { useEffect } from 'react'
 
 const useAsyncSelect = ({
-  queryParams,
   serviceName,
+  queryParams,
   searchQueryKey = 'title',
   valueKey = '_id',
   labelKey = 'title',
