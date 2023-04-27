@@ -1,11 +1,20 @@
 // import Input from '@components/Base/UI/Input'
 import { useForm } from 'react-hook-form'
 import PropTypes from 'prop-types'
-import Input from 'src/components/UI/Input/Controller'
-import DatePicker from 'src/components/UI/DatePicker/Controller'
-import { IconUser } from '@tabler/icons-react'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Flex } from '@mantine/core'
+import { IconUser, IconCalendar } from '@tabler/icons-react'
 import { useEffect } from 'react'
 import { Button } from '@mantine/core'
+import InputController from '@app/ui_elements/input/input-controller'
+import DateInputController from '@app/ui_elements/date-input/date-input-controller'
+
+const schema = yup.object().shape({
+  fName: yup.string().max(32).required().label('First name'),
+  lName: yup.string().max(32).required().label('Last name'),
+  dob: yup.date().required().label('Date Of Birth'),
+})
 
 const StudentForm = ({ onSubmit, data }) => {
   const {
@@ -14,7 +23,7 @@ const StudentForm = ({ onSubmit, data }) => {
     reset,
     formState: { errors },
     control,
-  } = useForm({})
+  } = useForm({ resolver: yupResolver(schema) })
 
   useEffect(() => {
     if (data) {
@@ -29,37 +38,34 @@ const StudentForm = ({ onSubmit, data }) => {
       style={{ display: 'flex', flexDirection: 'column' }}
       onSubmit={handleSubmit((vals) => onSubmit(reset, vals))}
     >
-      <Input
-        control={control}
-        label="First Name"
-        name="fName"
-        error={errors['fName']?.message}
-        rules={{ required: 'First Name is required' }}
-        placeholder="Enter First here"
-        icon={<IconUser />}
-      />
-      <br />
+      <Flex direction={{ base: 'column' }} gap={{ base: 'sm', sm: 'lg' }}>
+        <InputController
+          name="fName"
+          label={'First Name'}
+          withAsterisk
+          control={control}
+          icon={<IconUser />}
+          placeholder="Enter First Name here"
+        />
+        <InputController
+          name="lName"
+          label={'Last Name'}
+          withAsterisk
+          control={control}
+          icon={<IconUser />}
+          placeholder="Enter Last Name here"
+        />
+        <DateInputController
+          name="dob"
+          label={'Day of Birth'}
+          withAsterisk
+          control={control}
+          icon={<IconCalendar />}
+          placeholder="Select DOB"
+        />
 
-      <Input
-        control={control}
-        label="Last Name"
-        name="lName"
-        error={errors['lName']?.message}
-        rules={{ required: 'Last Name is required' }}
-        placeholder="Last name here"
-        autosize
-        icon={<IconUser />}
-      />
-      <br />
-      <DatePicker
-        control={control}
-        name="dob"
-        error={errors['dob']?.message}
-        label="Day of Birth"
-      />
-
-      <br />
-      <Button type="submit"> Submit</Button>
+        <Button type="submit"> Submit</Button>
+      </Flex>
     </form>
   )
 }
