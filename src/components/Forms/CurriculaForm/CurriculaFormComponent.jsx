@@ -6,7 +6,7 @@ import { IconAB2, IconFileTextAi, IconHeading } from '@tabler/icons-react'
 import { useEffect } from 'react'
 import { Button } from '@mantine/core'
 
-const LecturesForm = ({ onSubmit, data }) => {
+const CurriculaForm = ({ onSubmit, data }) => {
   const {
     handleSubmit,
     setValue,
@@ -64,9 +64,9 @@ const LecturesForm = ({ onSubmit, data }) => {
     </form>
   )
 }
-LecturesForm.propTypes = {
+CurriculaForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   data: PropTypes.object,
 }
 
-export default LecturesForm
+export default CurriculaForm

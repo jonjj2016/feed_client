@@ -1,5 +1,5 @@
 import React from 'react'
-import LecturesContainer from '@modules/lectures/Container'
+import LecturesContainer from '@modules/lectures/LecturesList'
 
 const Lectures = () => {
   return <LecturesContainer />

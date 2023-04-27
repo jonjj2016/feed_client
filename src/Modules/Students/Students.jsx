@@ -1,11 +1,11 @@
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import { useEffect, useState } from 'react'
 import constants from 'src/ModalTypes/index'
-import { Container, ActionIcon, Table } from '@mantine/core'
+import { Container, ActionIcon, Table, Button } from '@mantine/core'
 import { useMutation, useFind } from 'figbird'
 import { useNavigate } from 'react-router-dom'
 import { IconSettings, IconTrash } from '@tabler/icons-react'
-import Form from './FormContainer'
+// import Form from './FormContainer'
 import { notifications } from '@mantine/notifications'
 
 const Students = ({}) => {
@@ -33,8 +33,7 @@ const Students = ({}) => {
         <ActionIcon
           onClick={() => {
             open(`${constants.STUDENTS}`, {
-              state: { update: element._id, element },
-              search: `updateId=${element._id}&new=true`,
+              search: `studentId=${element._id}`,
             })
           }}
         >
@@ -55,7 +54,15 @@ const Students = ({}) => {
 
   return (
     <Container size="md">
-      <Form process="create" btntxt="Create Student" />
+      {/* <Form process="create" btntxt="Create Student" /> */}
+      <Button
+        onClick={() => {
+          open(`${constants.STUDENTS}`, {})
+        }}
+        variant="default"
+      >
+        Create Student
+      </Button>
       <Table highlightOnHover striped>
         <thead>
           <tr>

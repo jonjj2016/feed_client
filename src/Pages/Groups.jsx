@@ -2,13 +2,14 @@ import constants from 'src/ModalTypes/index'
 import { Button, ActionIcon, Table } from '@mantine/core'
 import { useMutation, useFind } from 'figbird'
 import { useNavigate } from 'react-router-dom'
+import useModalNavigate from 'src/Hooks/useModalRouter'
 
 import { IconSettings, IconTrash } from '@tabler/icons-react'
 
 const Groups = () => {
   const navigate = useNavigate()
   const { data } = useFind(constants.GROUPS, {})
-
+  const { open } = useModalNavigate()
   const rows = data?.map((element) => (
     <tr
       style={{ cursor: 'pointer' }}
@@ -34,6 +35,9 @@ const Groups = () => {
 
   return (
     <div>
+      <Button variant="default" onClick={() => open(constants.GROUPS)}>
+        Create Group
+      </Button>
       <Table highlightOnHover striped>
         <thead>
           <tr>
