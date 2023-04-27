@@ -1,43 +1,42 @@
-import { useDebouncedState } from "@mantine/hooks";
-import { useFind } from "figbird";
-import { useEffect } from "react";
+import { useDebouncedState } from '@mantine/hooks'
+import { useFind } from 'figbird'
+import { useEffect } from 'react'
 
 const useAsyncSelect = ({
   queryParams,
   serviceName,
-  searchQueryKey = "title",
-  valueKey = "_id",
-  labelKey = "title",
+  searchQueryKey = 'title',
+  valueKey = '_id',
+  labelKey = 'title',
   renderOptionLabel,
 }) => {
   const initialQuery = {
-    $sort: "-createdAt",
+    $sort: '-createdAt',
     isDeleted: false,
     ...queryParams,
-  };
-  const [searchValue, setSearchValue] = useDebouncedState("", 500);
+  }
+  const [searchValue, setSearchValue] = useDebouncedState('', 500)
   const { data, isFetching, status, refetch } = useFind(serviceName, {
     query: { ...initialQuery, query: { [searchQueryKey]: searchValue } },
     skip: false,
-  });
+  })
 
-  const onChangeInput = (value) => setSearchValue(value);
+  const onChangeInput = (value) => setSearchValue(value)
 
   const optionAdapter = (item) => {
     return {
       value: item[valueKey],
       label: renderOptionLabel ? renderOptionLabel(item) : item[labelKey],
-    };
-  };
-  console.log("data", data);
+    }
+  }
   return {
-    isLoading: status === "loading",
+    isLoading: status === 'loading',
     isFetching,
     selectProps: {
       data: data ? data.map(optionAdapter) : [],
       onSearchChange: onChangeInput,
     },
-  };
-};
+  }
+}
 
-export default useAsyncSelect;
+export default useAsyncSelect
