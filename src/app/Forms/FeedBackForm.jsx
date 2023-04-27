@@ -33,11 +33,14 @@ const FeedbackForm = ({ onSave, defaultValue }) => {
   })
   useEffect(() => {
     if (defaultValue) {
-      toggle()
-
       Object.keys(defaultValue).forEach((key) => {
-        setValue(key, defaultValue[key])
+        if (key == 'assessmentValues' && !defaultValue[key].length) {
+          setValue(key, [{ key: '', value: '5', text: '' }])
+        } else {
+          setValue(key, defaultValue[key])
+        }
       })
+      open()
     }
   }, [defaultValue])
   const onFormSave = (values) => {

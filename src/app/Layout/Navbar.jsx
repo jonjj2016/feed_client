@@ -21,7 +21,7 @@ const data = [
   { icon: IconUser, href: '/students', label: 'Students' },
   { icon: IconAbacus, href: '/lectures', label: 'Lectures' },
   { icon: IconAddressBook, href: '/groups', label: 'Groups' },
-  { icon: IconFileInvoice, href: '/feedbacks', label: 'Feedbacks' },
+  // { icon: IconFileInvoice, href: '/feedbacks', label: 'Feedbacks' },
   { icon: IconActivity, href: '/curricula', label: 'Curricula' },
 ]
 const Navbar = () => {
