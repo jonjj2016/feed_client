@@ -26,7 +26,6 @@ const GroupsFormContainer = () => {
         ...formValues,
         curriculumId,
       })
-      console.log('🚀 ~ file: GroupFormContainer.jsx:29 ~ onSubmit ~ tt:', tt)
 
       notifications.show({
         autoClose: 1500,

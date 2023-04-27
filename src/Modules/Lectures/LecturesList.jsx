@@ -1,5 +1,4 @@
 import useModalNavigate from 'src/Hooks/useModalRouter'
-import { useEffect, useState } from 'react'
 import constants from 'src/ModalTypes/index'
 import { Button, ActionIcon, Table } from '@mantine/core'
 import { useMutation, useFind } from 'figbird'
@@ -21,7 +20,6 @@ const Lectures = () => {
         <ActionIcon
           onClick={() => {
             open(`${constants.LECTURES}`, {
-              state: { update: element._id, element },
               search: `lectureId=${element._id}`,
             })
           }}
@@ -43,6 +41,14 @@ const Lectures = () => {
 
   return (
     <div>
+      <Button
+        onClick={() => {
+          open(`${constants.LECTURES}`, {})
+        }}
+        variant="default"
+      >
+        Create Lecture
+      </Button>
       <Table highlightOnHover striped>
         <thead>
           <tr>

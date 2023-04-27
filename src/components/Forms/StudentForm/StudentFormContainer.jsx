@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import StudentFormComponent from './StudentFormComponent'
 import { useSelector } from 'react-redux'
 import { useMutation, useGet } from 'figbird'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import useModalNavigate from 'src/Hooks/useModalRouter'
 
 import { notifications } from '@mantine/notifications'
