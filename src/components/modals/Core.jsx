@@ -1,5 +1,6 @@
 import StudentModal from './StudentModal'
 import LecturesModal from './LecturesModal'
+import CurriculaModal from './CurriculaModal'
 import useModalNavigate from 'src/Hooks/useModalRouter'
 import modalTypes from 'src/ModalTypes/index'
 
@@ -17,6 +18,11 @@ const CoreModal = () => {
         opened={match(modalTypes.LECTURES)}
         onClose={close}
         title="Lectures"
+      />
+      <CurriculaModal
+        opened={match(modalTypes.CURRICULA)}
+        onClose={close}
+        title="Curricula"
       />
     </>
   )

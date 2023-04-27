@@ -1,6 +1,6 @@
 import { Modal } from '@mantine/core'
 import PropTypes from 'prop-types'
-import StudentForm from '@components/Forms/StudentForm/StudentFormContainer'
+import StudentForm from '@app/Forms/studentForm/StudentFormContainer'
 
 const StudentModal = ({ ...props }) => {
   return (

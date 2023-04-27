@@ -3,7 +3,7 @@ import FormContainer from './FormContainer'
 import CurriculumList from './app/CurriculumList'
 import { useMutation, useGet, useFind } from 'figbird'
 import useModalNavigate from 'src/Hooks/useModalRouter'
-import { Container } from '@mantine/core'
+import { Container, Button } from '@mantine/core'
 import constants from 'src/ModalTypes/index'
 import { notifications } from '@mantine/notifications'
 import { useNavigate } from 'react-router-dom'
@@ -22,15 +22,11 @@ const Screen = () => {
       })
     }
   }, [error, mutationError])
-  useEffect(() => {
-    notifications.show({
-      title: 'Loading data',
-      color: 'green',
-      loading: isFetching,
-      message: 'Loading Curriculum',
+
+  const onEdit = (id) =>
+    open(constants.CURRICULA, {
+      search: `curriculaId=${id}`,
     })
-  }, [])
-  const onEdit = (id) => navigate(`/${constants.CURRICULA}/${id}#curricula`)
   const onDelete = async (id) => {
     await patch(id)
     notifications.show({
@@ -44,7 +40,11 @@ const Screen = () => {
   }
   return (
     <>
-      <FormContainer process="create" />
+      <Button variant="default" onClick={() => open(constants.CURRICULA)}>
+        Create Curricula
+      </Button>
+      <br />
+      <br />
       <CurriculumList
         onPreview={onPreview}
         onDelete={onDelete}
