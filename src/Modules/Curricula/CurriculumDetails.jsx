@@ -76,19 +76,21 @@ const GroupDetails = () => {
             >
               Add Student
             </Button>
-            <Button
-              onClick={() =>
-                open(constants.CURRICULA, {
-                  search: `groupId=${id}`,
-                })
-              }
-              variant="default"
-            >
+            <Button onClick={() => open(constants.CURRICULA)} variant="default">
               Create Curriculum
             </Button>
           </Tabs.Panel>
           <Tabs.Panel value="groups" pt="xs">
-            <CrateGroupModal process="create" />
+            <Button
+              variant="default"
+              onClick={() =>
+                open(constants.GROUPS, {
+                  search: `curriculumId=${id}`,
+                })
+              }
+            >
+              Create Group
+            </Button>
             <br />
             <br />
             <Table>
